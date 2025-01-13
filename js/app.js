@@ -39,7 +39,7 @@ const generateIdCard = async (data) => {
     doc.setFillColor(PRIMARY_COLOR);
     doc.circle(1.03, 1.03, 0.41, "F");
     const profileUri = await getDataUri(
-      `${window.origin}/Automatic%20Employee%20Card%20Genarator/images/${data[index].profile}`,
+      `${window.origin}/public/${data[index].profile}`,
       400,
       400
     );
