@@ -29,8 +29,8 @@ The **Automatic Identity Card Generator** is a web application built using **Exp
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/automatic-id-card-genarator-app.git
-cd automatic-identity-card-generator
+git clonehttps://github.com/your-username/automatic-employee-card-generate.git
+cd automatic-employee-card-generate
 ```
 
 ### 2. Install the necessary dependencies:
