@@ -5,27 +5,21 @@ formD.addEventListener("submit", function (e) {
 
   const formData = new FormData(this);
 
-  fetch("./src/save-form.php", {
-    method: "post",
+  fetch("/generate", {
+    method: "POST",
     body: formData,
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
         alert(data.message);
         formD.reset();
-        location.href = `./students.php?id=${data.data.uid}`;
+        location.href = "/students";
       } else {
         alert("Error: " + data.message);
       }
     })
     .catch((error) => {
       console.error("Error:", error);
-      alert("There was an error with the request.");
     });
 });

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic ID Card Generator App</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <% if (students.length === 0) { %>
+    <p>No students found.</p>
+    <% } else { %>
+    <iframe
+      src=""
+      frameborder="0"
+      id="id-card-preview"
+      title="Automatic ID Card Generator Preview"
+    ></iframe>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="./js/base64-image.js"></script>
+    <script src="./js/functions.js"></script>
+    <script src="./js/app.js"></script>
+
+    <!-- Embed the students data in a data attribute -->
+    <div
+      id="students-data"
+      data-students="<%= JSON.stringify(students) %>"
+    ></div>
+
+    <script type="text/javascript">
+      // Retrieve the students data from the data attribute
+      var studentsData = JSON.parse(
+        document.getElementById("students-data").getAttribute("data-students")
+      );
+
+      // Call the ID card generation function if there is student data
+      if (studentsData && studentsData.length > 0) {
+        generateIdCard(studentsData);
+      }
+    </script>
+    <% } %>
+  </body>
+</html>
