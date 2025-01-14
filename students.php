@@ -3,6 +3,7 @@
 include './src/database/config.php';
 
 $conn = getDbConnection();
+
 $conn->set_charset("utf8mb4");
 
 $students = [];
@@ -17,13 +18,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     if ($row = $result->fetch_assoc()) {
         $students[] = $row;
+
     } else {
         $students = [];
     }
 
     $stmt->close();
+  
 } else {
     $query = "SELECT * FROM students";
+
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
@@ -38,7 +42,6 @@ if ($encodedData === false) {
     echo "JSON Encoding error: " . json_last_error_msg();
     exit;
 }
-
 
 ?>
 
