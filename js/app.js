@@ -104,9 +104,9 @@ const generateIdCard = async (data) => {
     ];
 
     employeeData.forEach((item, i) => {
-      doc.text(item.label, 0.3, 2.13 + 0.13 * i, null, null, "left");
+      doc.text(String(item.label), 0.3, 2.13 + 0.13 * i, null, null, "left");
       doc.text(":", 0.6, 2.13 + 0.13 * i, null, null, "left");
-      doc.text(item.value, 0.7, 2.13 + 0.13 * i, null, null, "left");
+      doc.text(String(item.value), 0.7, 2.13 + 0.13 * i, null, null, "left");
     });
 
     // QRCODE BOTTOM IMAGE

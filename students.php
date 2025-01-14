@@ -3,41 +3,27 @@
 include './src/database/config.php';
 
 $conn = getDbConnection();
+$conn->set_charset("utf8mb4");
 
 $students = [];
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-
     $id = $_GET['id'];
 
-    $stmt = $conn->prepare("SELECT id, fullname, stdclass, roll, father, `address`, mobile, `profile`, `validupto` FROM students WHERE id = ?");
-
+    $stmt = $conn->prepare("SELECT * FROM students WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
+    $result = $stmt->get_result();
 
-    $stmt->bind_result($id, $fullname, $stdclass, $roll, $father, $address, $mobile, $profile, $validupto);
-
-    if ($stmt->fetch()) {
-        $students[] = [
-            "id" => $id,
-            "fullname" => $fullname,
-            "stdclass" => $stdclass,
-            "roll" => $roll,
-            "father" => $father,
-            "address" => $address,
-            "mobile" => $mobile,
-            "profile" => $profile,
-            "validupto" => $validupto
-        ];
+    if ($row = $result->fetch_assoc()) {
+        $students[] = $row;
     } else {
         $students = [];
     }
 
     $stmt->close();
-    $conn->close();
 } else {
-
-    $query = "SELECT id, fullname, stdclass, roll, father,validupto, address, mobile, profile FROM students";
+    $query = "SELECT * FROM students";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
@@ -45,9 +31,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $students[] = $row;
         }
     }
-
-    $conn->close();
 }
+
+$encodedData = json_encode($students, JSON_UNESCAPED_UNICODE);
+if ($encodedData === false) {
+    echo "JSON Encoding error: " . json_last_error_msg();
+    exit;
+}
+
 
 ?>
 
@@ -73,17 +64,29 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <script src="./js/functions.js"></script>
         <script src="./js/app.js"></script>
 
-        <div id="students-data" data-students='<?php echo json_encode($students); ?>'></div>
+        <div id="students-data" data-students='<?php echo $encodedData; ?>'></div>
+
 
         <script type="text/javascript">
-            var studentsData = JSON.parse(
-                document.getElementById("students-data").getAttribute("data-students")
-            );
+            var studentsData = null;
+            var studentsDataAttr = document.getElementById("students-data").getAttribute("data-students");
 
-            // console.log(studentsData);
+            if (studentsDataAttr) {
+                try {
+                    studentsData = JSON.parse(studentsDataAttr);
+                } catch (e) {
+                    console.error("Failed to parse JSON:", e);
+                }
+            }
 
-            if (studentsData && studentsData.length > 0) {
-                generateIdCard(studentsData);
+            if (!studentsData) {
+                console.log("No valid students data found.");
+            } else {
+                if (studentsData.length > 0) {
+                    generateIdCard(studentsData);
+                } else {
+                    console.log("No students available.");
+                }
             }
         </script>
     <?php endif; ?>
