@@ -35,7 +35,7 @@ function uploadProfileImage($file)
     if (move_uploaded_file($file_tmp_name, $file_path)) {
         return [
             "status" => "success",
-            "file_path" => $file_path
+            "file_path" =>  $file_name
         ];
     } else {
         return [
@@ -44,3 +44,4 @@ function uploadProfileImage($file)
         ];
     }
 }
+
