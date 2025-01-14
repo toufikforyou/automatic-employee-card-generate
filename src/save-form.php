@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $conn = getDbConnection();
+    $conn->set_charset("utf8mb4");
 
     $stmt = $conn->prepare("INSERT INTO students (`fullname`, `stdclass`, `roll`, `father`, `address`, `mobile`, `profile`) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssissss", $fullname, $stdclass, $roll, $father, $address, $mobile, $profile);
