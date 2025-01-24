@@ -29,7 +29,7 @@ The **Automatic Identity Card Generator** is a web application built using **Exp
 ### 1. Clone the repository:
 
 ```bash
-git clonehttps://github.com/your-username/automatic-employee-card-generate.git
+git clone https://github.com/your-username/automatic-employee-card-generate.git
 cd automatic-employee-card-generate
 ```
 
