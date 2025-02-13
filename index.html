@@ -1,109 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Automatic ID Card Genarator App</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="preload" href="./fonts/Kalpurush.ttf" as="font" type="font/ttf" crossorigin>
-    <style>
-        @font-face {
-            font-family: 'Kalpurush';
-            src: url('./fonts/Kalpurush.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-    </style>
-  </head>
 
-  <body>
-    <div class="form-container">
-      <form id="myForm" method="POST" enctype="multipart/form-data">
-        <h2>Student Information Form</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatic ID Card Genarator App</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="preload" href="./fonts/Kalpurush.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    @font-face {
+      font-family: 'Kalpurush';
+      src: url('./fonts/Kalpurush.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+</head>
 
-        <label for="profile">Profile Picture</label>
-        <input
-          type="file"
-          id="profile"
-          name="profile"
-          accept="image/*"
-          placeholder="ছবি সিলেক্ট করুন"
-          required
-        />
-
-        <label for="fullname">Full Name</label>
-        <input
-          type="text"
-          id="fullname"
-          name="fullname"
-          placeholder="পুরো নাম লিখুন"
-          required
-        />
-
-        <label for="class">Class</label>
-        <select id="class" name="stdclass" required>
-          <option value="">ক্লাস সিলেক্ট করুন</option>
-          <option value="প্লে">প্লে</option>
-          <option value="নার্সারী">নার্সারী</option>
-          <option value="নাজেরা">নাজেরা</option>
-          <option value="হেফজ">হেফজ</option>
-          <option value="প্রথম">প্রথম</option>
-          <option value="দ্বিতীয়">দ্বিতীয়</option>
-          <option value="তৃতীয়">তৃতীয়</option>
-          <option value="চতুর্থ">চতুর্থ</option>
-          <option value="পঞ্চম">পঞ্চম</option>
-        </select>
-
-        <label for="roll">Roll Number</label>
-        <input
-          type="number"
-          id="roll"
-          name="roll"
-          placeholder="রোল নাম্বার লিখুন"
-          required
-        />
-
-        <label for="father">Father's Name</label>
-        <input
-          type="text"
-          id="father"
-          name="father"
-          placeholder="শিক্ষার্থীর পিতার নাম লিখুন"
-          required
-        />
-
-        <label for="address">Address</label>
-        <input
-          type="address"
-          id="address"
-          name="address"
-          placeholder="ঠিকানা লিখুন"
-          required
-        />
-
-        <label for="mobile">Mobile Number</label>
-        <input
-          type="tel"
-          id="mobile"
-          name="mobile"
-          placeholder="মোবাইল নাম্বার লিখুন"
-          required
-        />
-
-        <!-- <label for="validupto">Valid Upto</label> -->
-        <input
-          type="text"
-          hidden
-          value="2025"
-          id="validupto"
-          name="validupto"
-          required
-        />
-
-        <button type="submit">Submit</button>
-      </form>
+<body>
+  <div class="form-container">
+    <!-- Add preview button at the top -->
+    <div class="button-group top-buttons">
+      <button type="button" class="preview-btn" onclick="previewCard()">
+        Show Card
+      </button>
     </div>
 
-    <script src="./js/handle-form.js"></script>
-  </body>
+    <form id="myForm" method="POST" enctype="multipart/form-data">
+      <h2>Student Information Form</h2>
+
+      <label for="profile">Profile Picture</label>
+      <input type="file" id="profile" name="profile" accept="image/*" placeholder="ছবি সিলেক্ট করুন" required />
+
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="পুরো নাম লিখুন" required />
+
+      <label for="class">Class</label>
+      <select id="class" name="stdclass" required>
+        <option value="">ক্লাস সিলেক্ট করুন</option>
+        <option value="প্লে">প্লে</option>
+        <option value="নার্সারী">নার্সারী</option>
+        <option value="নাজেরা">নাজেরা</option>
+        <option value="হেফজ">হেফজ</option>
+        <option value="প্রথম">প্রথম</option>
+        <option value="দ্বিতীয়">দ্বিতীয়</option>
+        <option value="তৃতীয়">তৃতীয়</option>
+        <option value="চতুর্থ">চতুর্থ</option>
+        <option value="পঞ্চম">পঞ্চম</option>
+      </select>
+
+      <label for="roll">Roll Number</label>
+      <input type="number" id="roll" name="roll" placeholder="রোল নাম্বার লিখুন" required />
+
+      <label for="father">Father's Name</label>
+      <input type="text" id="father" name="father" placeholder="শিক্ষার্থীর পিতার নাম লিখুন" required />
+
+      <label for="address">Address</label>
+      <input type="address" id="address" name="address" placeholder="ঠিকানা লিখুন" required />
+
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="মোবাইল নাম্বার লিখুন" required />
+
+      <!-- <label for="validupto">Valid Upto</label> -->
+      <input type="text" hidden value="2025" id="validupto" name="validupto" required />
+
+      <!-- Updated submit button at bottom -->
+      <div class="button-group">
+        <button type="submit">জমা দিন</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="./js/handle-form.js"></script>
+  <script>
+    function previewCard() {
+      window.location.href = './students.php?id=1';
+    }
+  </script>
+</body>
+
 </html>

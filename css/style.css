@@ -194,3 +194,21 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* Add to existing button-group styles */
+.button-group .top-buttons {
+    margin-bottom: 2rem;
+    justify-content: flex-start;
+}
+.top-buttons button{
+  background: #3B82F6 !important;
+}
+
+.preview-btn {
+    background: #3B82F6;
+    color: white;
+}
+
+.preview-btn:hover {
+    background: #2563EB;
+}
