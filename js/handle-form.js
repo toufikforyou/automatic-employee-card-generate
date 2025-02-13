@@ -26,6 +26,6 @@ formD.addEventListener("submit", function (e) {
     })
     .catch((error) => {
       console.error("Error:", error);
-      alert("There was an error with the request.");
+      alert(`There was an error with the request. ${error}`);
     });
 });

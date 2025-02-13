@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 
 include './database/config.php';
 include './file/file-upload.php';
