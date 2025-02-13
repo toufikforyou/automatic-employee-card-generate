@@ -26,11 +26,26 @@
       </button>
     </div>
 
+    <!-- Add below the preview button section -->
+    <div class="search-section">
+      <input type="number" id="searchId" placeholder="Enter Student ID">
+      <button type="button" onclick="loadStudent()">Load Student</button>
+    </div>
+
     <form id="myForm" method="POST" enctype="multipart/form-data">
       <h2>Student Information Form</h2>
 
-      <label for="profile">Profile Picture</label>
-      <input type="file" id="profile" name="profile" accept="image/*" placeholder="ছবি সিলেক্ট করুন" required />
+      <label for="profile" class="file-upload-label">
+        Choose Profile Picture
+      </label>
+      <input type="file" id="profile" name="profile" accept="image/*" onchange="previewImage(this)"
+        style="display: none;">
+
+      <!-- Add after profile input -->
+      <div class="profile-preview">
+        <img id="profilePreview" src="#" alt="Profile Preview" style="display: none;">
+        <input type="hidden" id="existingProfile" name="existing_profile">
+      </div>
 
       <label for="fullname">Full Name</label>
       <input type="text" id="fullname" name="fullname" placeholder="পুরো নাম লিখুন" required />
@@ -63,6 +78,9 @@
 
       <!-- <label for="validupto">Valid Upto</label> -->
       <input type="text" hidden value="2025" id="validupto" name="validupto" required />
+
+      <!-- Add hidden ID field in the form -->
+      <input type="hidden" id="studentId" name="id">
 
       <!-- Updated submit button at bottom -->
       <div class="button-group">

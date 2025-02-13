@@ -86,8 +86,8 @@ try {
             $stmt->close();
         }
     } else {
-        $result = $conn->query("SELECT * FROM students");
-        $students = $result->fetch_all(MYSQLI_ASSOC);
+        header('Location: ./');
+        exit;
     }
 
     foreach ($students as &$student) {
@@ -153,6 +153,11 @@ try {
                 পরবর্তী →
             </a>
             <?php endif; ?>
+        </div>
+        <div class="button-group">
+            <button class="action-btn prev-btn" onclick="window.location.href='./'">
+                শিক্ষার্থী যোগ করুন
+            </button>
         </div>
 
         <div class="canvas-wrapper">

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 $host = 'localhost';
 $dbname = 'toufikhasan_madrasha';
@@ -8,21 +9,20 @@ $password = '';
 function getDbConnection()
 {
     global $host, $dbname, $username, $password;
-    $conn = new mysqli($host, $username, $password, $dbname);
     
-    // Add proper charset configuration
-    if (!$conn->set_charset("utf8mb4")) {
-        die(json_encode([
-            "status" => "error",
-            "message" => "Error loading character set utf8mb4: " . $conn->error
-        ]));
+    try {
+        $conn = new mysqli($host, $username, $password, $dbname);
+        
+        if ($conn->connect_errno) {
+            throw new Exception("Database connection failed");
+        }
+        
+        if (!$conn->set_charset("utf8mb4")) {
+            throw new Exception("Character set error");
+        }
+        
+        return $conn;
+    } catch(Exception $e) {
+        throw new Exception("Database error: " . $e->getMessage());
     }
-    
-    if ($conn->connect_error) {
-        die(json_encode([
-            "status" => "error",
-            "message" => "Connection failed: " . $conn->connect_error
-        ]));
-    }
-    return $conn;
 }
