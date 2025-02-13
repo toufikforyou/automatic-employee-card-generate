@@ -265,3 +265,18 @@ button:hover {
 .file-upload-label:hover {
     background: var(--primary-hover);
 }
+
+.search-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.search-section input {
+  width: 60%;
+  height: auto;
+  margin: unset;
+}
