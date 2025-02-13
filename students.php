@@ -91,19 +91,7 @@ try {
     }
 
     foreach ($students as &$student) {
-        $originalRoll = $student['roll'];
-        
-        // Check if already starts with 0 or needs padding
-        if (!empty($originalRoll)) {
-            $numericValue = (int) $originalRoll;
-            $formattedRoll = (strlen($originalRoll) > 1 || $numericValue >= 10) 
-                ? $originalRoll 
-                : str_pad($numericValue, 2, '0', STR_PAD_LEFT);
-        } else {
-            $formattedRoll = '00'; // Handle empty case
-        }
-        
-        $student['roll'] = convertToUnicode($formattedRoll);
+        $student['roll'] = ($student['roll'] < 10 ? '0' . $student['roll'] : $student['roll']);
         $student['validupto'] = convertToUnicode($student['validupto']);
         $student['mobile'] = convertToUnicode($student['mobile']);
     }
